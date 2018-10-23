@@ -20,17 +20,21 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+
+	void CreateStage(); 
+
 public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
-
+	p2List<PhysBody*> chains; 
 	PhysBody* sensor;
 	bool sensed;
 
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
+	SDL_Texture* background_texture; 
 	uint bonus_fx;
 };
 

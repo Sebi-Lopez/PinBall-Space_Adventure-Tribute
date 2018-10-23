@@ -31,9 +31,10 @@ bool ModuleMainStage::Start()
 	circle = App->textures->Load("pinball/wheel.png");
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
+	background_texture = App->textures->Load("pinball/background.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
-	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50, this);
+	CreateStage();
 
 	return ret;
 }
@@ -49,6 +50,9 @@ bool ModuleMainStage::CleanUp()
 // Update: draw background
 update_status ModuleMainStage::Update()
 {
+
+	App->renderer->Blit(background_texture, 0, 0);
+	
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
@@ -153,4 +157,124 @@ void ModuleMainStage::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyB->GetPosition(x, y);
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}
+}
+
+void ModuleMainStage::CreateStage()
+{
+	int back_ground[146] = {
+	39, 115,
+	54, 97,
+	77, 73,
+	104, 51,
+	142, 28,
+	181, 16,
+	213, 11,
+	264, 11,
+	302, 18,
+	332, 28,
+	358, 43,
+	388, 70,
+	412, 100,
+	426, 122,
+	438, 154,
+	445, 187,
+	445, 239,
+	445, 458,
+	445, 531,
+	445, 619,
+	445, 708,
+	441, 717,
+	427, 717,
+	422, 709,
+	422, 597,
+	422, 212,
+	416, 176,
+	407, 148,
+	389, 115,
+	356, 80,
+	346, 80,
+	339, 84,
+	339, 117,
+	344, 122,
+	370, 122,
+	389, 206,
+	337, 320,
+	338, 326,
+	346, 330,
+	353, 330,
+	381, 267,
+	395, 236,
+	406, 269,
+	375, 348,
+	368, 374,
+	367, 490,
+	381, 507,
+	414, 541,
+	414, 664,
+	413, 673,
+	406, 680,
+	385, 691,
+	351, 706,
+	296, 733,
+	275, 741,
+	275, 767,
+	458, 768,
+	458, 2,
+	0, 1,
+	0, 768,
+	135, 768,
+	134, 742,
+	14, 686,
+	9, 678,
+	8, 550,
+	38, 519,
+	38, 506,
+	11, 478,
+	11, 207,
+	13, 182,
+	22, 150,
+	30, 130,
+	39, 115
+	};
+
+	chains.add(App->physics->CreateChain(0, 0, back_ground, 146, false));
+
+	int Bumper_Left[16] = {
+	1, 95,
+	2, 100,
+	12, 111,
+	55, 94,
+	54, 2,
+	50, 1,
+	38, 15,
+	1, 95
+	};
+
+	chains.add(App->physics->CreateChain(308, 532, Bumper_Left, 16, false));
+
+
+	int donut[34] = {
+	1, 41,
+	1, 29,
+	6, 17,
+	15, 7,
+	28, 1,
+	43, 1,
+	55, 6,
+	64, 16,
+	69, 29,
+	69, 42,
+	65, 55,
+	58, 65,
+	45, 71,
+	28, 71,
+	15, 66,
+	5, 55,
+	1, 41
+	};
+
+	chains.add(App->physics->CreateChain(258, 232, donut, 34, false));
+	chains.add(App->physics->CreateChain(194, 176, donut, 34, false));
+	chains.add(App->physics->CreateChain(283, 158, donut, 34, false));
+
 }
