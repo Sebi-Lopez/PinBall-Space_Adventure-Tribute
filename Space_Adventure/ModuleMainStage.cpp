@@ -250,7 +250,7 @@ void ModuleMainStage::CreateStage()
 	1, 95
 	};
 
-	chains.add(App->physics->CreateChain(308, 532, Bumper_Left, 16, false));
+	chains.add(App->physics->CreateChain(305, 532, Bumper_Left, 16, false));
 
 
 	int donut[34] = {
@@ -277,4 +277,172 @@ void ModuleMainStage::CreateStage()
 	chains.add(App->physics->CreateChain(194, 176, donut, 34, false));
 	chains.add(App->physics->CreateChain(283, 158, donut, 34, false));
 
+	int Bumper_Right[14] = {
+		8, 1,
+		20, 15,
+		57, 98,
+		46, 110,
+		4, 94,
+		4, 3,
+		8, 1
+	};
+	chains.add(App->physics->CreateChain(65, 531, Bumper_Right, 14, false));
+
+	int Coll_Orange[18] = {
+		7, 2,
+		14, 2,
+		19, 8,
+		19, 38,
+		14, 43,
+		7, 43,
+		2, 39,
+		1, 8,
+		7, 2
+	};
+	chains.add(App->physics->CreateChain(294, 92, Coll_Orange, 18, false));
+
+	int Coll_Blue[18] = {
+		3, 9,
+		9, 2,
+		16, 2,
+		22, 9,
+		22, 40,
+		16, 45,
+		9, 45,
+		3, 39,
+		3, 9
+	};
+	chains.add(App->physics->CreateChain(202, 101, Coll_Blue, 18, false));
+
+	int Coll_Green[18] = {
+		2, 7,
+		8, 2,
+		16, 2,
+		21, 8,
+		21, 36,
+		16, 42,
+		8, 42,
+		2, 36,
+		2, 7
+	};
+
+	chains.add(App->physics->CreateChain(251, 102, Coll_Green, 18, false));
+
+	int Jackpot[40] = {
+		3, 127,
+		1, 109,
+		8, 86,
+		25, 55,
+		45, 32,
+		62, 15,
+		69, 10,
+		75, 2,
+		97, 5,
+		97, 36,
+		77, 64,
+		53, 96,
+		38, 118,
+		23, 146,
+		21, 152,
+		21, 160,
+		18, 163,
+		14, 159,
+		7, 143,
+		3, 127
+	};
+	chains.add(App->physics->CreateChain(38, 78, Jackpot, 40, false));
+
+	int Monster_eye[72] = {
+		53, 96,
+		77, 66,
+		91, 44,
+		94, 30,
+		95, 8,
+		99, 3,
+		108, 3,
+		113, 8,
+		113, 33,
+		110, 41,
+		111, 132,
+		113, 141,
+		141, 169,
+		161, 198,
+		168, 213,
+		167, 233,
+		159, 215,
+		140, 190,
+		112, 164,
+		97, 146,
+		85, 133,
+		77, 130,
+		64, 132,
+		50, 145,
+		35, 170,
+		23, 196,
+		18, 212,
+		17, 235,
+		10, 226,
+		5, 218,
+		3, 201,
+		6, 182,
+		20, 155,
+		28, 140,
+		47, 106,
+		53, 96
+	};
+	chains.add(App->physics->CreateChain(66, 91, Monster_eye, 72, false));
+
+	int Coll_Metal[28] = {
+		4, 60,
+		74, 59,
+		78, 55,
+		78, 49,
+		68, 35,
+		52, 18,
+		36, 3,
+		30, 1,
+		20, 5,
+		9, 23,
+		1, 42,
+		0, 51,
+		1, 56,
+		4, 60
+	};
+	chains.add(App->physics->CreateChain(114, 265, Coll_Metal, 28, false));
+
+	int Coll_Metal_Right[26] = {
+		2, 121,
+		101, 83,
+		100, 11,
+		97, 7,
+		100, 1,
+		106, 1,
+		110, 6,
+		108, 11,
+		108, 90,
+		7, 139,
+		9, 131,
+		7, 126,
+		2, 121
+	};
+	chains.add(App->physics->CreateChain(286, 550, Coll_Metal_Right, 26, false));
+
+	int Coll_Metal_Left[30] = {
+		3, 58,
+		3, 91,
+		104, 139,
+		103, 133,
+		104, 126,
+		110, 122,
+		11, 83,
+		11, 12,
+		14, 7,
+		12, 3,
+		8, 1,
+		3, 3,
+		1, 7,
+		3, 11,
+		3, 58
+	};
+	chains.add(App->physics->CreateChain(28, 552, Coll_Metal_Left, 30, false));
 }
