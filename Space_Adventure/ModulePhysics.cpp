@@ -152,12 +152,10 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, bool dynamic)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType body_type)
 {
 	b2BodyDef body;
-	if(dynamic)
-		body.type = b2_dynamicBody;
-	else body.type = b2_staticBody;
+	body.type = body_type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);

@@ -102,7 +102,7 @@ update_status ModuleMainStage::Update()
 			30, 62
 		};
 
-		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
+		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64, b2_staticBody));
 	}
 
 	// All draw functions ------------------------------------------------------
@@ -237,7 +237,7 @@ void ModuleMainStage::CreateStage()
 	39, 115
 	};
 
-	chains.add(App->physics->CreateChain(0, 0, back_ground, 146, false));
+	chains.add(App->physics->CreateChain(0, 0, back_ground, 146, b2_staticBody));
 
 	int Bumper_Left[16] = {
 	1, 95,
@@ -250,7 +250,7 @@ void ModuleMainStage::CreateStage()
 	1, 95
 	};
 
-	chains.add(App->physics->CreateChain(308, 532, Bumper_Left, 16, false));
+	chains.add(App->physics->CreateChain(308, 532, Bumper_Left, 16, b2_staticBody));
 
 
 	int donut[34] = {
@@ -273,8 +273,8 @@ void ModuleMainStage::CreateStage()
 	1, 41
 	};
 
-	chains.add(App->physics->CreateChain(258, 232, donut, 34, false));
-	chains.add(App->physics->CreateChain(194, 176, donut, 34, false));
-	chains.add(App->physics->CreateChain(283, 158, donut, 34, false));
+	chains.add(App->physics->CreateChain(258, 232, donut, 34, b2_staticBody));
+	chains.add(App->physics->CreateChain(194, 176, donut, 34, b2_staticBody));
+	chains.add(App->physics->CreateChain(283, 158, donut, 34, b2_staticBody));
 
 }
