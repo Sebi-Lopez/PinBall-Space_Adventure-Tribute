@@ -102,7 +102,7 @@ update_status ModuleMainStage::Update()
 			30, 62
 		};
 
-		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
+		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64, b2_staticBody));
 	}
 
 	// All draw functions ------------------------------------------------------
@@ -237,7 +237,7 @@ void ModuleMainStage::CreateStage()
 	39, 115
 	};
 
-	chains.add(App->physics->CreateChain(0, 0, back_ground, 146, false));
+	chains.add(App->physics->CreateChain(0, 0, back_ground, 146, b2_staticBody));
 
 	int Bumper_Left[16] = {
 	1, 95,
@@ -250,7 +250,7 @@ void ModuleMainStage::CreateStage()
 	1, 95
 	};
 
-	chains.add(App->physics->CreateChain(305, 532, Bumper_Left, 16, false));
+	chains.add(App->physics->CreateChain(305, 532, Bumper_Left, 16, b2_staticBody));
 
 
 	int donut[34] = {
@@ -273,9 +273,9 @@ void ModuleMainStage::CreateStage()
 	1, 41
 	};
 
-	chains.add(App->physics->CreateChain(258, 232, donut, 34, false));
-	chains.add(App->physics->CreateChain(194, 176, donut, 34, false));
-	chains.add(App->physics->CreateChain(283, 158, donut, 34, false));
+	chains.add(App->physics->CreateChain(258, 232, donut, 34, b2_staticBody));
+	chains.add(App->physics->CreateChain(194, 176, donut, 34, b2_staticBody));
+	chains.add(App->physics->CreateChain(283, 158, donut, 34, b2_staticBody));
 
 	int Bumper_Right[14] = {
 		8, 1,
@@ -286,7 +286,7 @@ void ModuleMainStage::CreateStage()
 		4, 3,
 		8, 1
 	};
-	chains.add(App->physics->CreateChain(65, 531, Bumper_Right, 14, false));
+	chains.add(App->physics->CreateChain(65, 531, Bumper_Right, 14, b2_staticBody));
 
 	int Coll_Orange[18] = {
 		7, 2,
@@ -299,7 +299,7 @@ void ModuleMainStage::CreateStage()
 		1, 8,
 		7, 2
 	};
-	chains.add(App->physics->CreateChain(294, 92, Coll_Orange, 18, false));
+	chains.add(App->physics->CreateChain(294, 92, Coll_Orange, 18, b2_staticBody));
 
 	int Coll_Blue[18] = {
 		3, 9,
@@ -312,7 +312,7 @@ void ModuleMainStage::CreateStage()
 		3, 39,
 		3, 9
 	};
-	chains.add(App->physics->CreateChain(202, 101, Coll_Blue, 18, false));
+	chains.add(App->physics->CreateChain(202, 101, Coll_Blue, 18, b2_staticBody));
 
 	int Coll_Green[18] = {
 		2, 7,
@@ -326,7 +326,7 @@ void ModuleMainStage::CreateStage()
 		2, 7
 	};
 
-	chains.add(App->physics->CreateChain(251, 102, Coll_Green, 18, false));
+	chains.add(App->physics->CreateChain(251, 102, Coll_Green, 18, b2_staticBody));
 
 	int Jackpot[40] = {
 		3, 127,
@@ -350,7 +350,7 @@ void ModuleMainStage::CreateStage()
 		7, 143,
 		3, 127
 	};
-	chains.add(App->physics->CreateChain(38, 78, Jackpot, 40, false));
+	chains.add(App->physics->CreateChain(38, 78, Jackpot, 40, b2_staticBody));
 
 	int Monster_eye[72] = {
 		53, 96,
@@ -390,7 +390,7 @@ void ModuleMainStage::CreateStage()
 		47, 106,
 		53, 96
 	};
-	chains.add(App->physics->CreateChain(66, 91, Monster_eye, 72, false));
+	chains.add(App->physics->CreateChain(66, 91, Monster_eye, 72, b2_staticBody));
 
 	int Coll_Metal[28] = {
 		4, 60,
@@ -408,7 +408,7 @@ void ModuleMainStage::CreateStage()
 		1, 56,
 		4, 60
 	};
-	chains.add(App->physics->CreateChain(114, 265, Coll_Metal, 28, false));
+	chains.add(App->physics->CreateChain(114, 265, Coll_Metal, 28, b2_staticBody));
 
 	int Coll_Metal_Right[26] = {
 		2, 121,
@@ -425,7 +425,7 @@ void ModuleMainStage::CreateStage()
 		7, 126,
 		2, 121
 	};
-	chains.add(App->physics->CreateChain(286, 550, Coll_Metal_Right, 26, false));
+	chains.add(App->physics->CreateChain(286, 550, Coll_Metal_Right, 26, b2_staticBody));
 
 	int Coll_Metal_Left[30] = {
 		3, 58,
@@ -444,5 +444,5 @@ void ModuleMainStage::CreateStage()
 		3, 11,
 		3, 58
 	};
-	chains.add(App->physics->CreateChain(28, 552, Coll_Metal_Left, 30, false));
+	chains.add(App->physics->CreateChain(28, 552, Coll_Metal_Left, 30, b2_staticBody));
 }
