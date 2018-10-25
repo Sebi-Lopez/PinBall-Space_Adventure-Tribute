@@ -219,6 +219,22 @@ PhysBody * ModulePhysics::CreatePolygon(int x, int y, int* vertices, uint num_po
 	return pbody;
 }
 
+b2RevoluteJoint * ModulePhysics::CreateRevolutionJoint(PhysBody* Body_A, PhysBody* Body_B, b2Vec2 anchor_A, b2Vec2 anchor_B, float lower_angle, float upper_angle)
+{
+	b2RevoluteJointDef defJoint;
+	defJoint.bodyA = Body_A->body;
+	defJoint.bodyB = Body_B->body;
+	defJoint.collideConnected = false;
+	defJoint.localAnchorA = anchor_A;
+	defJoint.localAnchorB = anchor_B;
+	defJoint.lowerAngle = lower_angle * DEGTORAD;
+	defJoint.upperAngle = upper_angle * DEGTORAD;
+	defJoint.enableLimit = true;
+
+	b2RevoluteJoint* rev_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&defJoint);
+	return rev_joint;
+}
+
 // 
 update_status ModulePhysics::PostUpdate()
 {
