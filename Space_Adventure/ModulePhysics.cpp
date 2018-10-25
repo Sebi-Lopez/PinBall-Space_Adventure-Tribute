@@ -75,10 +75,10 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType body_type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = body_type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -182,6 +182,39 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2Body
 	pbody->body = b;
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = 0;
+
+	return pbody;
+}
+
+PhysBody * ModulePhysics::CreatePolygon(int x, int y, int* vertices, uint num_points, b2BodyType body_type)
+{
+	b2BodyDef body;
+	body.type = body_type;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = App->physics->world->CreateBody(&body);
+	b2PolygonShape polygon;
+
+	b2Vec2* p = new b2Vec2[num_points / 2];
+
+	for (uint i = 0; i < num_points / 2; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(vertices[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(vertices[i * 2 + 1]);
+	}
+
+	polygon.Set(p, num_points / 2);
+
+	b2FixtureDef fixture;
+	fixture.density = 1.0f;
+	fixture.shape = &polygon;
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = 0;
+	pbody->height = 0;
 
 	return pbody;
 }

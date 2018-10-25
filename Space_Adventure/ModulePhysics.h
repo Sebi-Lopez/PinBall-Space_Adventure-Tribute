@@ -42,10 +42,13 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius);
+	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType body_type = b2_dynamicBody);
 	PhysBody* CreateRectangle(int x, int y, int width, int height);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, Module* listener);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType  body_type = b2_dynamicBody);
+	PhysBody* CreatePolygon(int x, int y, int* vertices, uint num_points, b2BodyType body_type = b2_dynamicBody);
+
+
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
@@ -53,10 +56,13 @@ public:
 private:
 
 	bool debug;
-	b2World* world;
+	//b2World* world;
 	b2Body* ground;
 
 	// Mouse joint
 	b2MouseJoint* mouse_joint;
 	b2Body* body_clicked;
+
+public: 
+	b2World* world;
 };

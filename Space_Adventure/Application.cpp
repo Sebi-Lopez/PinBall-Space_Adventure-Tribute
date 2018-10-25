@@ -20,11 +20,11 @@ Application::Application()
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
-	player = new ModulePlayer(this, false);
-	scene_intro = new ModuleSceneIntro(this);
-	physics = new ModulePhysics(this, false);
+	player = new ModulePlayer(this);
+	scene_intro = new ModuleSceneIntro(this, false);
+	physics = new ModulePhysics(this);
 	fade = new ModuleFadeToBlack(this);
-	main_stage = new ModuleMainStage(this, false); 
+	main_stage = new ModuleMainStage(this); 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
