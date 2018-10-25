@@ -9,6 +9,16 @@
 class PhysBody;
 struct SDL_Texture; 
 
+struct SensorType {
+	PhysBody* Death = nullptr;
+	PhysBody* Box1 = nullptr;
+	PhysBody* Box2 = nullptr;
+	PhysBody* Box3 = nullptr;
+	bool Box1A = false;
+	bool Box2A = false;
+	bool Box3A = false;
+};
+
 class ModuleMainStage : public Module
 {
 public:
@@ -22,14 +32,17 @@ public:
 
 
 	void CreateStage(); 
+	void Sensors();
 
 public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 	p2List<PhysBody*> chains; 
+	PhysBody* Ball;
 	PhysBody* sensor;
 	bool sensed;
+	SensorType Sens;
 
 	SDL_Texture* circle;
 	SDL_Texture* box;

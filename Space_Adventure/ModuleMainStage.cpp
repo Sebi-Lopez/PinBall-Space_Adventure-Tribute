@@ -33,10 +33,23 @@ bool ModuleMainStage::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	background_texture = App->textures->Load("pinball/background.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	int initballx = 227;
+	int initbally = 403;
+	Ball = App->physics->CreateCircle(initballx, initbally, 12, b2_staticBody);
+	Ball->listener = this;
+
 
 	CreateStage();
+	Sensors();
 
 	return ret;
+	if (Sens.Box1A && Sens.Box2A && Sens.Box3A) {
+		// Subes la score + 300;
+		Sens.Box1A = false;
+		Sens.Box2A = false;
+		Sens.Box3A = false;
+
+	}
 }
 
 // Load assets
@@ -141,22 +154,30 @@ update_status ModuleMainStage::Update()
 
 void ModuleMainStage::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
+	
 
-	App->audio->PlayFx(bonus_fx);
+	if (bodyB == Sens.Death && bodyA == Ball) {
+		
 
+	}
+	else {
 
-	if (bodyA)
-	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+		if (bodyB == Sens.Box1 && bodyA == Ball) {
+			// subir score + 30;
+			Sens.Box1A = true;
+		}
+		if (bodyB == Sens.Box2 && bodyA == Ball) {
+			// subir score + 30;
+			Sens.Box2A = true;
+		}
+		if (bodyB == Sens.Box3 && bodyA == Ball) {
+			// subir score + 30;
+			Sens.Box3A = true;
+
+		}
 	}
 
-	if (bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}
+	
 }
 
 void ModuleMainStage::CreateStage()
@@ -445,4 +466,17 @@ void ModuleMainStage::CreateStage()
 		3, 58
 	};
 	chains.add(App->physics->CreateChain(28, 552, Coll_Metal_Left, 30, b2_staticBody));
+	
+
 }
+
+void ModuleMainStage::Sensors() {
+
+	Sens.Box1 = App->physics->CreateRectangleSensor(117+10,322+10,21,20,this);
+	Sens.Box2 = App->physics->CreateRectangleSensor(141+10,322+10, 21, 20,this);
+	Sens.Box3 = App->physics->CreateRectangleSensor(165+10,322+10, 21, 20,this);
+	Sens.Death = App->physics->CreateRectangleSensor(0, 820, 600, 40, this);
+
+
+}
+
