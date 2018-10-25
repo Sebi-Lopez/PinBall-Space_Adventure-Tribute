@@ -2,10 +2,9 @@
 #include "Module.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "ModulePhysics.h"
 
 class PhysBody;
-class b2RevoluteJoint;
-class b2DistanceJoint; 
 
 
 class ModulePlayer : public Module
@@ -20,7 +19,8 @@ public:
 
 public:
 	uint lifes;
-	b2DistanceJoint* kicker = nullptr; 
+	PhysBody* kicker = nullptr; 
+	b2Vec2 impulse = { 0, 0 };
 	b2RevoluteJoint* flipper_left = nullptr;
 	b2RevoluteJoint* flipper_right = nullptr;
 };

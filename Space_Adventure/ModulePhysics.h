@@ -43,11 +43,12 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType body_type = b2_dynamicBody);
-	PhysBody* CreateRectangle(int x, int y, int width, int height);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType body_type = b2_dynamicBody);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, Module* listener);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType  body_type = b2_dynamicBody);
 	PhysBody* CreatePolygon(int x, int y, int* vertices, uint num_points, b2BodyType body_type = b2_dynamicBody);
 	b2RevoluteJoint* CreateRevolutionJoint(PhysBody* Body_A, PhysBody* Body_B, b2Vec2 ancor_A, b2Vec2 anchor_B, float lower_anble, float upper_angle);
+
 
 
 	// b2ContactListener ---

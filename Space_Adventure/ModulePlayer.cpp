@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModulePlayer.h"
 #include "ModulePhysics.h"
+#include "ModuleInput.h"
+
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -59,6 +61,34 @@ bool ModulePlayer::Start()
 	b2Vec2 anchor_B_r = { PIXEL_TO_METERS(62), PIXEL_TO_METERS(14)};
 	App->physics->CreateRevolutionJoint(anchor_r, flipper_body_r, anchor_A_r, anchor_B_r, 0, 60);
 
+
+	kicker = App->physics->CreateRectangle(433, 650, 25, 10, b2_dynamicBody);
+	PhysBody* kicker_anchor = App->physics->CreateRectangle(433, 700, 5, 10, b2_staticBody);
+
+	b2PrismaticJointDef prismaticJointDef;
+	prismaticJointDef.bodyA = kicker->body;
+	prismaticJointDef.bodyB = kicker_anchor->body;
+	prismaticJointDef.localAnchorA = kicker->body->GetLocalCenter();
+	prismaticJointDef.localAnchorB = kicker_anchor->body->GetLocalCenter();
+	prismaticJointDef.localAxisA = { 0.0f,1.0f };
+	prismaticJointDef.collideConnected = true;
+
+	b2PrismaticJoint* kicker_joint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&prismaticJointDef);
+
+	b2DistanceJointDef distanceJointDef;
+	distanceJointDef.bodyA = kicker->body;
+	distanceJointDef.bodyB = kicker_anchor->body;
+	distanceJointDef.localAnchorA = kicker->body->GetLocalCenter();
+	distanceJointDef.localAnchorB = kicker_anchor->body->GetLocalCenter();
+
+	distanceJointDef.collideConnected = true;
+
+	distanceJointDef.frequencyHz = 7.f;
+	distanceJointDef.dampingRatio = 0.3f;
+
+	b2DistanceJoint* kicker_djoint = (b2DistanceJoint*)App->physics->world->CreateJoint(&distanceJointDef);
+
+
 	return true;
 }
 
@@ -73,6 +103,23 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+
+
+	if (App->input->GetKey(5) == KEY_REPEAT) {
+
+		if (impulse.y < 100.0f)
+			impulse.y += 2.0f;
+
+		kicker->body->ApplyForce(impulse, { 0.0f, 0.0f }, true);
+	}
+
+	if (App->input->GetKey(5) == KEY_UP) {
+
+		kicker->body->ApplyForce({ 0.0f, -impulse.y * 5.0f }, { 0.0f, 0.0f }, true);
+		impulse = { 0.0f,0.0f };
+	}
+
+
 	return UPDATE_CONTINUE;
 }
 

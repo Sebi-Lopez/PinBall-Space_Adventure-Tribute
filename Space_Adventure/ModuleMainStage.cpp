@@ -27,7 +27,7 @@ bool ModuleMainStage::Start()
 	App->player->Enable();
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
-	
+
 	circle = App->textures->Load("pinball/wheel.png");
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
@@ -50,6 +50,9 @@ bool ModuleMainStage::Start()
 		Sens.Box3A = false;
 
 	}
+
+	
+
 }
 
 // Load assets
@@ -68,7 +71,7 @@ update_status ModuleMainStage::Update()
 	
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 10));
 		circles.getLast()->data->listener = this;
 	}
 

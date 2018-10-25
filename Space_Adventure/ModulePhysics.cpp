@@ -99,10 +99,10 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType body_
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2BodyType body_type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = body_type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -234,6 +234,7 @@ b2RevoluteJoint * ModulePhysics::CreateRevolutionJoint(PhysBody* Body_A, PhysBod
 	b2RevoluteJoint* rev_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&defJoint);
 	return rev_joint;
 }
+
 
 // 
 update_status ModulePhysics::PostUpdate()
