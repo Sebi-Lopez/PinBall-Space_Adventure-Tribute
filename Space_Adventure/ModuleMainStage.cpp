@@ -33,10 +33,7 @@ bool ModuleMainStage::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	background_texture = App->textures->Load("pinball/background.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-	int initballx = 227;
-	int initbally = 403;
-	Ball = App->physics->CreateCircle(initballx, initbally, 12, b2_staticBody);
-	Ball->listener = this;
+	
 
 
 	CreateStage();
@@ -151,16 +148,19 @@ update_status ModuleMainStage::Update()
 		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
-
+	
 	return UPDATE_CONTINUE;
 }
 
 void ModuleMainStage::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	
+	PhysBody* ball = App->player->ball;
 
-	if (bodyB == Sens.Death && bodyA == Ball) {
-		
+	if (bodyB == Sens.Death && bodyA == ball) {
+
+		App->player->ResetBall();
+	
 
 	}
 	else {

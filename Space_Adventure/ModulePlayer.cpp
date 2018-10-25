@@ -15,8 +15,9 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-
+	ball = CBall();
 	b2RevoluteJointDef jointDef;
+	lifes = 3;
 
 	int flipper_points_l[20] = {
 	1, 16,
@@ -32,15 +33,13 @@ bool ModulePlayer::Start()
 	};
 
 
-
 	PhysBody* flipper_body = App->physics->CreatePolygon(120, 671, flipper_points_l, 20);
 	PhysBody* anchor_l = App->physics->CreateCircle(130, 681, PIXEL_TO_METERS(500), b2_staticBody);
 	b2Vec2 anchor_A_l = anchor_l->body->GetLocalCenter(); 
 	b2Vec2 anchor_B_l = { PIXEL_TO_METERS (10) , PIXEL_TO_METERS(11) };
 	App->physics->CreateRevolutionJoint(anchor_l, flipper_body, anchor_A_l, anchor_B_l, 0, -50);
 	
-		
-			
+	
 
 	int flipper_points_r[20] = {
 	3, 39,
@@ -103,8 +102,6 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-
-
 	if (App->input->GetKey(5) == KEY_REPEAT) {
 
 		if (impulse.y < 100.0f)
@@ -118,10 +115,40 @@ update_status ModulePlayer::Update()
 		kicker->body->ApplyForce({ 0.0f, -impulse.y * 5.0f }, { 0.0f, 0.0f }, true);
 		impulse = { 0.0f,0.0f };
 	}
+	
 
-
+	if (resetBall)
+		ResetBall();
 	return UPDATE_CONTINUE;
 }
 
 
 
+PhysBody * ModulePlayer::CBall()
+{
+	InitialPos.x = 203;
+	InitialPos.y = 570;
+	PhysBody* ballPB = App->physics->CreateCircle(InitialPos.x, InitialPos.y, 5, b2_dynamicBody);
+	ballPB->listener = (Module*)App->main_stage;
+	return ballPB;
+}
+
+PhysBody* ModulePlayer::GetBall()
+{
+	return ball;
+}
+
+void ModulePlayer::ResetBall()
+{
+	if (ball->body != nullptr) {
+		App->physics->world->DestroyBody(ball->body);
+		ball = nullptr;
+	}
+
+	lifes--;
+	
+	if (lifes > 0)
+		ball = CBall();
+
+	resetBall = false;
+}

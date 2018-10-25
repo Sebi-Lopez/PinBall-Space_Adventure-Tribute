@@ -16,6 +16,10 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	PhysBody* CBall();
+	PhysBody* GetBall();
+	void ResetBall();
+	bool resetBall = false;
 
 public:
 	uint lifes;
@@ -23,4 +27,7 @@ public:
 	b2Vec2 impulse = { 0, 0 };
 	b2RevoluteJoint* flipper_left = nullptr;
 	b2RevoluteJoint* flipper_right = nullptr;
+	PhysBody* ball = nullptr;
+	iPoint InitialPos = { 0,0 };
+
 };
