@@ -13,7 +13,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-
+	ball = CBall();
 	b2RevoluteJointDef jointDef;
 	lifes = 3;
 
@@ -74,8 +74,38 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	if (resetBall)
+		ResetBall();
 	return UPDATE_CONTINUE;
 }
 
 
 
+PhysBody * ModulePlayer::CBall()
+{
+	InitialPos.x = 203;
+	InitialPos.y = 570;
+	PhysBody* ballPB = App->physics->CreateCircle(InitialPos.x, InitialPos.y, 5, b2_dynamicBody);
+	ballPB->listener = (Module*)App->main_stage;
+	return ballPB;
+}
+
+PhysBody* ModulePlayer::GetBall()
+{
+	return ball;
+}
+
+void ModulePlayer::ResetBall()
+{
+	if (ball->body != nullptr) {
+		App->physics->world->DestroyBody(ball->body);
+		ball = nullptr;
+	}
+
+	lifes--;
+	
+	if (lifes > 0)
+		ball = CBall();
+
+	resetBall = false;
+}

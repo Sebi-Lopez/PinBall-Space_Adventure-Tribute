@@ -17,10 +17,17 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	PhysBody* CBall();
+	PhysBody* GetBall();
+	void ResetBall();
+	bool resetBall = false;
 
 public:
 	uint lifes;
 	b2DistanceJoint* kicker = nullptr; 
 	b2RevoluteJoint* flipper_left = nullptr;
 	b2RevoluteJoint* flipper_right = nullptr;
+	PhysBody* ball = nullptr;
+	iPoint InitialPos = 0;
+
 };
