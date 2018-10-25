@@ -15,6 +15,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	b2RevoluteJointDef jointDef;
+	lifes = 3;
 
 	int flipper_points_l[20] = {
 	1, 16,

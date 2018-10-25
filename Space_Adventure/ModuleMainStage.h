@@ -30,7 +30,7 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
-
+	PhysBody* BallC();
 	void CreateStage(); 
 	void Sensors();
 
@@ -39,9 +39,11 @@ public:
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 	p2List<PhysBody*> chains; 
-	PhysBody* Ball;
+	PhysBody* Ball = nullptr;
 	PhysBody* sensor;
 	bool sensed;
+	int initballx;
+	int initbally;
 	SensorType Sens;
 
 	SDL_Texture* circle;

@@ -33,10 +33,9 @@ bool ModuleMainStage::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	background_texture = App->textures->Load("pinball/background.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-	int initballx = 227;
-	int initbally = 403;
-	Ball = App->physics->CreateCircle(initballx, initbally, 12, b2_staticBody);
-	Ball->listener = this;
+	initballx = 198;
+	initbally = 600;
+	Ball = BallC();
 
 
 	CreateStage();
@@ -157,7 +156,22 @@ void ModuleMainStage::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	
 
 	if (bodyB == Sens.Death && bodyA == Ball) {
+		if (Ball->body != nullptr) {
+			App->physics->world->DestroyBody(Ball->body);
+		}
+
+		App->player->lifes--;
+		//Play death sound
+		//App->audio->PlayFx(App->audio->GetFX().deathSound);
+
 		
+		if (App->player->lifes > 0) {
+			BallC();
+		}
+	
+		
+
+	
 
 	}
 	else {
@@ -480,3 +494,9 @@ void ModuleMainStage::Sensors() {
 
 }
 
+PhysBody * ModuleMainStage::BallC() {
+	
+	PhysBody* ballPB = App->physics->CreateCircle(initballx, initbally, 5, b2_dynamicBody);
+	ballPB->listener = this;
+	return ballPB;
+}
